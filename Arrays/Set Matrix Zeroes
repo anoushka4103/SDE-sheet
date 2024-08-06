@@ -1,0 +1,50 @@
+class Solution {
+    public void setZeroes(int[][] matrix) {
+
+        // find m and n
+        int m = matrix.length;
+        int n = matrix[0].length;
+        // have a marker row and marker column that will indicate if the row/col is supposed to be 0
+        // extra variable so first cell doesnt overlap
+        boolean row_zero = false;
+
+        // determine which rows and columns need to be 0
+        for(int r=0; r<m; r++) {
+            for(int c=0; c<n; c++) {
+                // if a zero is found at [r][c]:
+                if(matrix[r][c] == 0) {
+                    // set the element in first row and that column as 0
+                    matrix[0][c] = 0;
+                    // also set the element in 0th column in that row as 0 UNLESS it is the 0th row
+                    if(r > 0) {
+                        matrix[r][0] = 0;
+                    }
+                    else { // if row is first row, since we have a special variable for it, set that to true
+                        row_zero = true;
+                    }
+                }
+            }
+        }
+
+        // now start checking which rows and columns are to be set 0
+        for (int r=1; r<m; r++) { // skip the first row
+            for (int c=1; c<n; c++) { // skip the first column
+                if(matrix[0][c] == 0 || matrix[r][0]==0) { // first row's cols and first col's rows = 0 then set all row col = 0
+                    matrix[r][c] = 0;
+                }
+            }
+        }
+        if(matrix[0][0] == 0) { // if the first row and first col is marked w 0 
+        // this is the marker of column 
+        for(int r=0; r<m; r++) { 
+            matrix[r][0] = 0; // make first column = 0
+            }
+        }
+        if (row_zero == true) { // for the extra variable we took for element (0,0)
+        // this is the marker of row
+            for (int c=0; c<n; c++) { // make the first row's all columns as 0
+                matrix[0][c] = 0;
+            }
+        }
+    }
+}
