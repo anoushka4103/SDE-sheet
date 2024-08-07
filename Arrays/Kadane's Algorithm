@@ -1,0 +1,42 @@
+// 1. Brute force method:
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int n = nums.length;
+        int max = Integer.MIN_VALUE;
+
+        for (int i=0; i<n; i++) {
+            for(int j=i; j<n; j++) {
+                int sum = 0;
+
+                for (int k=i; k<=j; k++) {
+                    sum += nums[k];
+                }
+                max = Math.max(max, sum);
+            }
+        }
+        return max;
+    }       
+}
+
+// But the problem is, this has O(n^3) time complexity and it is reducible. 
+// 2. O(n^2) method
+// A slightly better method that doesnt use a third loop. but, it is still not enough
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int n = nums.length;
+        int max = Integer.MIN_VALUE;
+
+        for (int i=0; i<n; i++) {
+            int sum = 0;
+            for(int j=i; j<n; j++) {
+                sum += nums[j];
+                max = Math.max(max, sum);
+            }
+        }
+        return max;
+    }       
+}
+
+// 3. O(n) solution. 
