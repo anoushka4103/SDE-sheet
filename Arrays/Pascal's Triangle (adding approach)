@@ -1,0 +1,32 @@
+class Solution {
+    public List<List<Integer>> generate(int numRows) 
+    {
+        List<List<Integer>> result = new ArrayList<>();
+        // if the number of rows asked is 0, return empty list
+        if(numRows == 0) {
+            return result;
+        }
+        // adding the first row which only contains 1
+        List<Integer> firstRow = new ArrayList<>();
+        firstRow.add(1);
+        result.add(firstRow);
+
+        // general cases
+        for (int i = 1; i<numRows; i++) {
+            List<Integer> prevRow = result.get(i-1);
+            // since it is a list of lists, previous row will be n-1th element
+            List<Integer> currentRow = new ArrayList<>();
+            // creating a new list for the current row and will add 1 to it
+            currentRow.add(1);
+
+            // for inside elements, get previous row's two elements and add them in curr row
+            for (int j=1; j<i; j++) {
+                currentRow.add(prevRow.get(j-1) + prevRow.get(j));
+            }
+
+            currentRow.add(1); // sdd 1 in the end after adding all elements from prev row
+            result.add(currentRow);
+        }
+        return result;
+    }
+}
