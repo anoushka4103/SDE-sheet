@@ -1,0 +1,48 @@
+// O(n^2) solution but it exceeds time limit
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        int max_profit = 0;
+        for (int i = 0; i<prices.length; i++) {
+            for(int j = i+1; j<prices.length; j++) {
+                if (prices[j] > prices[i]) {
+                    max_profit = Math.max(max_profit, prices[j] - prices[i]);
+                }
+            }
+        }
+        return max_profit;
+    }
+}
+
+// O(n) solution with comments 
+
+// O(n)
+class Solution {
+    public int maxProfit(int[] prices) {
+        int max_profit = 0; 
+
+//initializing the profit to 0
+
+        int min_day = Integer.MAX_VALUE; 
+
+//we have to find the day on which the stock price is minimum so we will initialize it to max value and change it as we go
+
+        for (int i = 0; i<prices.length; i++) {
+
+// if min value on a day is > current day value, change min = current day value
+// if it is < current day, we already know that up till now its the least possible value
+
+            if (min_day > prices[i]) { 
+                min_day = prices[i];
+            }
+
+// then we compare max_profit we have and the difference between current value and the minimum value of all the days that we have from before and update max accordingly
+
+            max_profit = Math.max(max_profit, prices[i]-min_day);
+        }
+
+// and so we have the max profit by maximizing the difference between least stock value and the current day value by iterating only once
+
+        return max_profit;
+    }
+}
