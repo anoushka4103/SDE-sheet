@@ -1,0 +1,26 @@
+class Solution {
+    public void rotate(int[][] matrix) {
+
+        int n = matrix.length;
+        int m = matrix[0].length;
+// transposing the matrix
+         for (int i = 0; i < m; i++) {
+            for (int j = i; j < m; j++) {
+                int temp = 0;
+                temp = matrix[i][j];
+                matrix[i][j] = matrix[j][i];
+                matrix[j][i] = temp;
+            }
+        }
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < m / 2; j++) { 
+// n/2 to avoid double swapping
+                int temp = 0;
+                temp = matrix[i][j];
+                matrix[i][j] = matrix[i][m - 1 - j]; 
+// the number of rows = our new number of cols hence m-1-j
+                matrix[i][m - 1 - j] = temp;
+            }
+        }
+    }
+}
