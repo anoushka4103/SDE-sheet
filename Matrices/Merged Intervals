@@ -1,0 +1,39 @@
+class Solution {
+    public int[][] merge(int[][] intervals) {
+        // sort the given list according to their starting elements
+        Arrays.sort(intervals, (a, b) -> Integer.compare(a[0],  b[0]));
+
+        // create a new arraylist to hold merged intervals. Since it will change dynamically we have taken an arraylist
+        List<int []> merged = new ArrayList<>();
+
+        // create an array previous to point to the previous array in intervals array
+        // it will initially point to the first element
+        int [] prev = intervals[0];
+
+        // traverse the intervals array 
+        // pointer starts from the second element as prev = 0th element, current = 1st element
+        for (int i=1; i<intervals.length; i++) {
+
+            // an array holder to hold i th (current) array in place
+            int[] current = intervals[i];
+
+            // comapre if the start element of current array <= ending element of prev array 
+            // i.e. check if they can be merged
+            if (current[0] <= prev[1]) {
+
+                // if yes, then set the maximum of ending element of prev array and ending element of current array as ending element of prev array
+                prev[1] = Math.max(prev[1], current[1]);
+            }
+            else {
+                // if they dont overlap and cannot be merged, add the prev array in list "merged" and move the prev pointer to current
+                merged.add(prev);
+                prev = current;
+            }
+        }
+        // last element is one of the intervals we need to return to we add prev in the list after entire iteration is finished
+        merged.add(prev);
+
+        // since we need to return merged list as array
+        return merged.toArray(new int[merged.size()][]);
+    }
+}
