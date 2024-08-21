@@ -6,7 +6,7 @@ class Solution {
         long N = n;
         if (N < 0) {
             x = 1/x;
-            N = -N;
+            N = N-1;
         }
         double result = 1.0;
         while(N > 0) {
