@@ -1,0 +1,23 @@
+import java.util.*;
+public class RemoveVowels {
+    public static String removeVowels(String s) {
+        // write your code here
+        String vowels = "aeiouAEIOU";
+        String result = "";
+        for (int i=0; i<s.length(); i++) {
+            if (!vowels.contains(String.valueOf(s.charAt(i)))) { // if vowels do NOT contain the value that is at ith position in s
+                result += s.charAt(i); // then append that character at ith position in resultant string
+            }
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Enter string: ");
+        Scanner scanner = new Scanner(System.in);
+        String input_string = scanner.nextLine();
+        String output_string = removeVowels(input_string);
+        System.out.println(output_string);
+    }
+    
+}
