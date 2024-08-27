@@ -1,0 +1,44 @@
+class Solution {
+    public String reformatDate(String date) {
+        String[] str_arr = date.split(" ");
+        StringBuilder sb = new StringBuilder();
+        
+        // appending year
+        for (int i=0; i<4; i++) {
+            sb.append(str_arr[2].charAt(i));
+        }
+        sb.append('-');
+
+        // appending month
+        Map <String, String> m = new HashMap<>();
+        m.put("Jan", "01");
+        m.put("Feb", "02");
+        m.put("Mar", "03");
+        m.put("Apr", "04");
+        m.put("May", "05");
+        m.put("Jun", "06");
+        m.put("Jul", "07");
+        m.put("Aug", "08");
+        m.put("Sep", "09");
+        m.put("Oct", "10");
+        m.put("Nov", "11");
+        m.put("Dec", "12");
+
+        sb.append(m.get(str_arr[1]));
+        sb.append('-');
+
+        // appending date
+        String date_num = str_arr[0];
+        if(Character.isDigit(date_num.charAt(1)) && Character.isDigit(date_num.charAt(0))) {
+            sb.append(date_num.charAt(0));
+            sb.append(date_num.charAt(1));
+        }
+        else {
+            sb.append('0');
+            sb.append(date_num.charAt(0));
+        }
+
+
+        return sb.toString();
+    }
+}
